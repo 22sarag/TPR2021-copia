@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +12,13 @@ use App\Http\Controllers\CursoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', HomeController::class);
-Route::get('cursos',  [CursoController::class, 'index']);
-Route::get('cursos/create',  [CursoController::class, 'create']);
-Route::get('cursos/{curso}',  [CursoController::class, 'show']);
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
